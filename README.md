@@ -1,5 +1,5 @@
-# mhetar
-personal website
+# Mhetar.com
+A personal showcase
 
 A personal website for projects, a blog, and other work. 
 
