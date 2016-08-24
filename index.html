@@ -5,6 +5,7 @@
         
         <link type="text/css" rel="stylesheet" href="./css/style.css">
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.2/css/bulma.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Bentham" rel="stylesheet">
         <style>
         li {
           margin: 20px;
@@ -23,6 +24,19 @@
 
         }
 
+        #blog h2{         
+          font-family: 'Bentham', serif;
+        }
+
+        #artwork { 
+          background-color: white;
+          font-family: 'Bentham', serif;
+        }
+
+        #artwork img { 
+
+        }
+
         #post-page {
           margin: 50px;
         }
@@ -37,21 +51,50 @@
 
 <section id="blog" class="hero is-success">
   <div class="container has-text-center" style="padding: 50px; white-space: nowrap">
+    <div class="row"> 
+      <h2 class="title is-2"> Scattered Thoughts </h2>
+    </div>
     <div class='row'>
      <ul>
      
          <li>
+          <h3 class="subtitle is-5" style="display:inline;"> 2016-08-23 </h3>
+
+          <h3 class="title is-4" style="display:inline"> 
+           <a href="/2016/08/23/Measuring-progress/" style="color:white;"> 
+            Measuring progress 
+           </a>
+          </h3>
+         
+         </li>
+       
+         <li>
           <h3 class="subtitle is-5" style="display:inline;"> 2016-08-20 </h3>
 
-          <h2 class="title is-4" style="display:inline"> 
+          <h3 class="title is-4" style="display:inline"> 
            <a href="/2016/08/20/This-ll-be-the-first/" style="color:white;"> 
             This&#39;ll be the first.  
            </a>
-          </h2>
+          </h3>
          
          </li>
        
      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="artwork"> 
+  <div class="container">
+    <div class="row"> 
+      <h2 class="title is-2" style="text-align:center; padding: 30px"> Artwork </h2>
+    </div>
+    <div class="row">
+      <div class="columns">
+        <div class="column"> <img src="./images/banana.png"> </div>
+        <div class="column"> <img src="./images/mango.png"> </div>
+        <div class="column"> <img src="./images/knife.png"> </div>
+      </div>
     </div>
   </div>
 </section>
