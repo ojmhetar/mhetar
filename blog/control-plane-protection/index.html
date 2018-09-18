@@ -76,7 +76,7 @@
 <p>Each node has a fixed amount of resources. If we allow the workloads on our machine (in this case, pods), we could potentially starve the components which manage those workloads. i.e pods are consuming so much memory that kube-apiserver is starved for resources and cannot function properly. </p>
 <br>
 
-<p>We want to either allocate some resources speicfically for our critical components, or perhaps set a limit for the amount of resources that pods can consume.</p> 
+<p>We want to either allocate some resources specifically for our critical components, or perhaps set a limit for the amount of resources that pods can consume.</p> 
 <br>
 
 <p>Lucky for us, kubelet has a few flags which we can use to  reserve resources for kubernetes services as well as other system services. Here was the design proposal from the community: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/node/node-allocatable.md#recommended-cgroups-setup as well as the official documentation: https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/. </p>
