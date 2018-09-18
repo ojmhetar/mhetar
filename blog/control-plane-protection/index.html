@@ -1,0 +1,124 @@
+<html><head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <link type="text/css" rel="stylesheet" href="./css/style.css">
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.2/css/bulma.min.css">
+        <script src="//lightwidget.com/widgets/lightwidget.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Bentham" rel="stylesheet">
+        <style>
+        li {
+          margin: 20px;
+        }
+
+        #cover-bg {
+          background-image : url('./images/mhetar.png'); 
+          background-size: 100% auto;
+          background-position:center;
+          background-repeat: no-repeat;
+          background-color: #0f0517
+        }
+
+        #blog {
+          background-color: #0f0517;
+
+        }
+
+        #blog h2{         
+          font-family: 'Bentham', serif;
+        }
+
+        #artwork { 
+          background-color: white;
+          font-family: 'Bentham', serif;
+        }
+
+        #artwork img { 
+
+        }
+
+        #post-page {
+          margin: 50px;
+        }
+
+        #insta {
+          margin: 30px;
+        }
+
+        </style>
+    </head><body> 
+
+        
+            <section id="post-page">
+
+<div class="container">
+	<div class="columns">
+		<div class="column"> </div>
+		<div class="column is-two-thirds"> 
+		  <h1 class="title is-2 has-text-centered"> Control Plane Protection  </h1>
+		  <h3 class="subtitle is-5 has-text-centered">
+		        2018-09-18
+		  </h3>
+		  <p>
+<p>I could’ve added “for production-ready Kubernetes” in the title, but I didn’t. You’re welcome. </p>
+<br>
+
+<p>In this post I’m going to cover just a few of the considerations when “protecting” the components which make up your [kubernetes] control plane. This could be applied to other critical production services. I’ll be narrowing the focus to kubernetes components and talk about relevant considerations. </p>
+<br>
+
+<p>As a refresher, we consider the k8s (kubernetes) control plane to be the pieces critical to managing the cluster and its workloads: kubelet, etcd, kube-apiserver, controller manager, scheduler, kube-proxy, kube-dns. I’ll also throw in keepalived, flanneld, and sshd because those are important to my clusters. </p>
+<br>
+
+<p>What does it mean to protect a control plane? </p>
+<br>
+
+<p>Each node has a fixed amount of resources. If we allow the workloads on our machine (in this case, pods), we could potentially starve the components which manage those workloads. i.e pods are consuming so much memory that kube-apiserver is starved for resources and cannot function properly. </p>
+<br>
+
+<p>We want to either allocate some resources speicfically for our critical components, or perhaps set a limit for the amount of resources that pods can consume.</p> 
+<br>
+
+<p>Lucky for us, kubelet has a few flags which we can use to  reserve resources for kubernetes services as well as other system services. Here was the design proposal from the community: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/node/node-allocatable.md#recommended-cgroups-setup as well as the official documentation: https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/. </p>
+<br>
+
+<p>Now you might be thinking, wow the flags are here, perfect. I can ignore the rest of this post! Sure, you might be able to get away with it. It is important to note that the kube-reserved and system-reserved set upper bound restrictions on your services. This means if you set a value too low, your service will be OOM (Out of Memory) killed! </p>
+<br>
+
+<p>An alternative is to set just the evict-hard flag which will decrease the Allocatable value so that pods are not able to use the node’s entire capacity. </p>
+<br>
+
+<p>Specifying just the evict-hard flag might be sufficient in most cases as a lower bound, however doesn’t take into account non-critical system services that could run on your node(s). </p>
+<br>
+
+<p>We set scheduling priorities by using the ionice/nice/renice commands by defining the option in the unit file. We can use systemd.resource-control to give the effect of a memory request by defining MemoryLow. See https://www.kernel.org/doc/Documentation/cgroup-v2.txt
+and https://www.kernel.org/doc/Documentation/cgroup-v2.txt (#Protections). This step becomes more necessary when your nodes are not dedicated for the control plane (not recommended for production) or you have some other services running on the node. </p>
+<br>
+
+<p>In the post, I’ll discuss how to determine what values to set for the “lower bound” memory request. (Once I figure out how to do it myself). </p>
+<br>
+
+<p>Till next time, </p>
+-Ojas
+<br>
+
+		  </p>
+		</div>
+		<div class="column"> </div>
+	</div>
+</div>
+
+</section>
+          
+    
+    </body>
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+            By Ojas Mhetar. <strong> Thanks. </strong> Feel free to contact me about anything <strong>ojas@mhetar.com </strong>                     
+        </div>
+      </div>
+    </footer>
+
+
+</html>
