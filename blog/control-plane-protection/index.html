@@ -91,7 +91,7 @@
 <p>Specifying just the evict-hard flag might be sufficient in most cases as a lower bound, however doesn’t take into account non-critical system services that could run on your node(s). </p>
 <br>
 
-<p>We set scheduling priorities by using the ionice/nice/renice commands by defining the option in the unit file. We can use systemd.resource-control to give the effect of a memory request by defining MemoryLow. See https://www.kernel.org/doc/Documentation/cgroup-v2.txt
+<p>We set scheduling priorities by using the ionice/nice/renice commands by defining the option in the unit file. We can use systemd.resource-control to give the effect of a memory request by defining MemoryLow. See https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html
 and https://www.kernel.org/doc/Documentation/cgroup-v2.txt (#Protections). This step becomes more necessary when your nodes are not dedicated for the control plane (not recommended for production) or you have some other services running on the node. </p>
 <br>
 
@@ -115,7 +115,7 @@ and https://www.kernel.org/doc/Documentation/cgroup-v2.txt (#Protections). This 
     <footer class="footer">
       <div class="container">
         <div class="content has-text-centered">
-            By Ojas Mhetar. <strong> Thanks. </strong> Feel free to contact me about anything <strong>ojas@mhetar.com </strong>                     
+            <strong>ojas@mhetar.com</strong>                     
         </div>
       </div>
     </footer>
